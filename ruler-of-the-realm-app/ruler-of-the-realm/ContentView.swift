@@ -10,41 +10,69 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            VStack {
-                NavigationLink(destination: TaskView()) {
-                    Text("Go to Tasks")
-                        .font(.title)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding()
+            ZStack {
+                // Background image
+                Image("home-background")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .zero, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(0.8)
+                
+                VStack {
+                    // UI elements like buttons go here
+                    NavigationLink(destination: TaskView()) {
+                        Text("Go to Tasks")
+                            .font(.title)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .padding()
 
-                NavigationLink(destination: DuelView()) {
-                    Text("Go to Duels")
-                        .font(.title)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding()
+                    NavigationLink(destination: DuelView()) {
+                        Text("Go to Duels")
+                            .font(.title)
+                            .padding()
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .padding()
 
-                NavigationLink(destination: ProfileView()) {
-                    Text("Go to Profile")
-                        .font(.title)
-                        .padding()
-                        .background(Color.orange)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                    NavigationLink(destination: ProfileView()) {
+                        Text("Go to Profile")
+                            .font(.title)
+                            .padding()
+                            .background(Color.orange)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .padding()
                 }
-                .padding()
+                .navigationBarTitle("Ruler of the Realm", displayMode: .inline) // Title centered and inline
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text("Ruler of the Realm")
+                            .font(.largeTitle)
+                            .bold() // Make the title bold
+                            .foregroundColor(.yellow) // Set title color to white
+                            .overlay( // Add outline
+                                Text("Ruler of the Realm")
+                                    .font(.largeTitle)
+                                    .bold()
+                                    .foregroundColor(.black) // Outline color
+                                    .offset(x: 2, y: 2)
+                            )
+                    }
+                }
             }
-            .navigationBarTitle("Ruler of the Realm")
         }
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

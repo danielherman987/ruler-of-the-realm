@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct User: Identifiable {
+    var id = UUID()
+}
+
+struct Character: Identifiable {
+    var id = UUID()
+    
+}
