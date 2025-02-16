@@ -8,6 +8,7 @@ struct ProfileView: View {
     @State private var focuses = ["Focus 1", "Focus 2", "Focus 3"]
     @State private var showRespecModal = false
     @State private var newFocuses = ["Focus 1", "Focus 2", "Focus 3"]
+    @State private var bounce = false
 
     // Predefined list of possible focus options
     let allFocusOptions = Focuses.allCases.map { $0.rawValue }
@@ -53,6 +54,24 @@ struct ProfileView: View {
                     )
             }
             .padding(.top, 10)
+
+            // Display character image under the Respec button if available
+            if let imagePath = setCharacterImage(classType: userClass), let uiImage = UIImage(named: imagePath) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 250, height: 250)
+                    .padding(.top, 20)
+                    .offset(y: bounce ? 0 : 12) // Bounce effect (vertical)
+                    .animation(
+                        .interpolatingSpring(stiffness: 200, damping: 2) // Spring animation for bounce effect
+                        .repeatForever(autoreverses: true), value: bounce
+                    )
+                    .onAppear {
+                        // Trigger the bounce animation
+                        bounce.toggle()
+                    }
+            }
 
             Spacer()
 

@@ -108,3 +108,10 @@ func determineClassTypeString(for priorities: [String]) -> classTypes? {
     
     return classTypeMap[Set(sortedPriorities)]
 }
+
+
+// Function to set character image based on class type
+func setCharacterImage(classType: classTypes?) -> String? {
+    // Replace with actual image paths based on class type
+    return classType?.rawValue.replacingOccurrences(of: " ", with: "")
+}
