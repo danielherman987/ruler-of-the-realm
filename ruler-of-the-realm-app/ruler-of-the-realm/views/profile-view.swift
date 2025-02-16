@@ -21,7 +21,7 @@ struct ProfileView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Name: \(userName)")
                 Text("XP: \(userXP)")
-                Text("Class: \(userClass?.stringValue ?? "Unknown")") // Ensure safe unwrapping
+                Text("Class: \(userClass?.rawValue ?? "Unknown")") // Ensure safe unwrapping
                 Text("Level: \(userLevel)")
             }
             .padding()
@@ -79,7 +79,8 @@ struct ProfileView: View {
                     // Dropdowns for selecting new focuses
                     ForEach(0..<focuses.count, id: \.self) { index in
                         Picker("Select Focus \(index + 1)", selection: $newFocuses[index]) {
-                            ForEach(allFocusOptions, id: \.self) { focusOption in
+                            // Filter out the already selected focuses
+                            ForEach(allFocusOptions.filter { !newFocuses.contains($0) || $0 == newFocuses[index] }, id: \.self) { focusOption in
                                 Text(focusOption)
                                     .tag(focusOption)
                             }
