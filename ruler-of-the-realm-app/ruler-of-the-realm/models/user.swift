@@ -13,5 +13,6 @@ struct User: Identifiable {
 
 struct Character: Identifiable {
     var id = UUID()
-    
+    var xp: Int
+    var characterClass: CharacterClass
 }
