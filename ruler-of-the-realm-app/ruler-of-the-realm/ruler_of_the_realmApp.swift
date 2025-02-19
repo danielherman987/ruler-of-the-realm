@@ -6,15 +6,27 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
-struct ruler_of_the_realmApp: App {
-    let persistenceController = PersistenceController.shared
+struct RulerOfTheRealmApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @State private var isAuthenticated = false  // ✅ Keep track of authentication state
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            if isAuthenticated {
+                ContentView() // ✅ Show main app when signed in
+            } else {
+                SignInView(isAuthenticated: $isAuthenticated)  // ✅ Pass binding
+            }
         }
+    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
     }
 }

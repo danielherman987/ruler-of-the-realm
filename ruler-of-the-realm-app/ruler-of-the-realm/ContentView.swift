@@ -6,11 +6,26 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct ContentView: View {
+    let db = Firestore.firestore()
     var body: some View {
         NavigationView {
             ZStack {
+                
+//                Text("Firestore Test")
+//                    .padding()
+//                    .onAppear {
+//                        let testDoc = db.collection("test").document("sample")
+//                        testDoc.setData(["message": "Hello, Firestore!"]) { error in
+//                            if let error = error {
+//                                print("Error writing document: \(error)")
+//                            } else {
+//                                print("Document successfully written!")
+//                            }
+//                        }
+//                    }
                 // Background image
                 Image("home-background")
                     .resizable()
